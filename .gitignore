@@ -7,7 +7,6 @@ bin/
 obj/
 
 # Файлы проекта Code::Blocks
-*.cbp
 *.depend
 *.layout
 
