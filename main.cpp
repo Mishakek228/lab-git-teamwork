@@ -3,56 +3,58 @@
 #include <string>
 #include <fstream>
 #include <locale>
-#include <codecvt>
+
 
 using namespace std;
 
 // Функция 1: Чтение строк из файла в вектор
-vector<string> readLinesFromFile(const string& filename) {
-    vector<string> lines;
+vector<wstring> readLinesFromFile(const string& filename)
+{
+    vector<wstring> lines;
     ifstream file(filename);
 
     if (!file.is_open()) {
-        wcerr << L"Ошибка: не удалось открыть файл " << filename.c_str() << endl;
+        cerr << "Ошибка: не удалось открыть файл " << filename << endl;
         return lines;
     }
 
     string line;
     while (getline(file, line)) {
         if (!line.empty()) {
-            lines.push_back(line);
+            wstring wline(line.begin(), line.end());
+            lines.push_back(wline);
         }
     }
 
     file.close();
     for (size_t i = 0; i < lines.size(); ++i) {
-        wcout << L"[" << i << L"] " << lines[i].c_str() << endl;
+        wcout << L"[" << i << L"] " << lines[i] << endl;
     }
 
     return lines;
 }
 
 // Функция 2: Вывод вектора строк на экран
-void printLinesToConsole(const vector<string>& lines) {
+void printLinesToConsole(const vector<wstring>& lines) {
    if (lines.empty()) {
-       cout << "Вектор строк пуст. Нечего выводить." << endl;
+       wcout << L"Вектор строк пуст. Нечего выводить." << endl;
        return;
    }
 
-   cout << "\n=== ВЫВОД СОДЕРЖИМОГО (" << lines.size() << " строк) ===" << endl;
-   cout << "------------------------------------------------" << endl;
+   wcout << L"\n=== ВЫВОД СОДЕРЖИМОГО (" << lines.size() << L" строк) ===" << endl;
+   wcout << L"------------------------------------------------" << endl;
 
    for (size_t i = 0; i < lines.size(); ++i) {
-       cout << "Строка " << (i + 1) << ": \"" << lines[i] << "\"" << endl;
+       wcout << L"Строка " << (i + 1) << L": \"" << lines[i] << L"\"" << endl;
    }
 
-   cout << "------------------------------------------------" << endl;
-   cout << "Всего строк: " << lines.size() << endl;
+   wcout << L"------------------------------------------------" << endl;
+   wcout << L"Всего строк: " << lines.size() << endl;
 }
 // Функция 3: Запись вектора строк в файл
-void writeLinesToFile(const vector<string>& lines, const string& filename) {
+void writeLinesToFile(const vector<wstring>& lines, const string& filename) {
     if (lines.empty()) {
-        cout << "Предупреждение: попытка записать пустой вектор в файл." << endl;
+        wcout << L"Предупреждение: попытка записать пустой вектор в файл." << endl;
         return;
     }
 
@@ -64,13 +66,14 @@ void writeLinesToFile(const vector<string>& lines, const string& filename) {
     }
 
     for (const auto& line : lines) {
-        file << line << endl;
+        string str(line.begin(), line.end());
+        file << str << endl;
     }
 
     file.close();
 
-    cout << "Успешно записано " << lines.size() << " строк в файл '"
-         << filename << "'" << endl;
+    wcout << L"Успешно записано " << lines.size() << L" строк в файл '"
+         << filename.c_str() << L"'" << endl;
 }
 
 
@@ -84,13 +87,13 @@ int main() {
     string inputFilename = "input.txt";
     string outputFilename = "output.txt";
 
-    wcout << L"Имя входного файла: " << inputFilename.c_str() << endl;
-    wcout << L"Имя выходного файла: " << outputFilename.c_str() << endl;
+    wcout << L"Имя входного файла: " << inputFilename.c_str()<< endl;
+    wcout << L"Имя выходного файла: " << outputFilename.c_str()<< endl;
     wcout << endl;
 
     // 1. Чтение из файла
     wcout << L"Шаг 1: Чтение данных из файла..." << endl;
-    vector<string> lines = readLinesFromFile(inputFilename);
+    vector<wstring> lines = readLinesFromFile(inputFilename);
 
     // 2. Вывод на экран
     wcout << L"Шаг 2: Вывод данных на экран..." << endl;
