@@ -43,7 +43,6 @@ void writeLinesToFile(const vector<string>& lines, const string& filename) {
 
     cout << "Успешно записано " << lines.size() << " строк в файл '"
          << filename << "'" << endl;
-    wcout << L"[ОТЛАДКА] Функция writeLinesToFile() пока не реализована." << endl;
 }
 
 
