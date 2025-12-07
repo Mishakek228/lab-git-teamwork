@@ -10,8 +10,25 @@ using namespace std;
 // Функция 1: Чтение строк из файла в вектор
 vector<string> readLinesFromFile(const string& filename) {
     vector<string> lines;
-    // TODO: Реализовать чтение из файла
-    wcout << L"[ОТЛАДКА] Функция readLinesFromFile() пока не реализована." << endl;
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        wcerr << L"Ошибка: не удалось открыть файл " << filename.c_str() << endl;
+        return lines;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            lines.push_back(line);
+        }
+    }
+
+    file.close();
+    for (size_t i = 0; i < lines.size(); ++i) {
+        wcout << L"[" << i << L"] " << lines[i].c_str() << endl;
+    }
+
     return lines;
 }
 
