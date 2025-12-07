@@ -1,0 +1,21 @@
+# Исполняемые файлы
+*.exe
+*.out
+
+# Папки сборки Code::Blocks
+bin/
+obj/
+
+# Файлы проекта Code::Blocks
+*.cbp
+*.depend
+*.layout
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+*.swp
+
+# Файлы компиляции
+*.o
+*.obj
