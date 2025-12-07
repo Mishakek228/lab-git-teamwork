@@ -51,8 +51,26 @@ void printLinesToConsole(const vector<string>& lines) {
 }
 // Функция 3: Запись вектора строк в файл
 void writeLinesToFile(const vector<string>& lines, const string& filename) {
-    // TODO: Реализовать запись в файл
-    wcout << L"[ОТЛАДКА] Функция writeLinesToFile() пока не реализована." << endl;
+    if (lines.empty()) {
+        cout << "Предупреждение: попытка записать пустой вектор в файл." << endl;
+        return;
+    }
+
+    ofstream file(filename);
+
+    if (!file.is_open()) {
+        cerr << "Ошибка: не удалось создать файл " << filename << endl;
+        return;
+    }
+
+    for (const auto& line : lines) {
+        file << line << endl;
+    }
+
+    file.close();
+
+    cout << "Успешно записано " << lines.size() << " строк в файл '"
+         << filename << "'" << endl;
 }
 
 
