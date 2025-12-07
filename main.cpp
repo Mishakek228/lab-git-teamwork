@@ -34,10 +34,21 @@ vector<string> readLinesFromFile(const string& filename) {
 
 // Функция 2: Вывод вектора строк на экран
 void printLinesToConsole(const vector<string>& lines) {
-    // TODO: Реализовать вывод на экран
-    wcout << L"[ОТЛАДКА] Функция printLinesToConsole() пока не реализована." << endl;
-}
+   if (lines.empty()) {
+       cout << "Вектор строк пуст. Нечего выводить." << endl;
+       return;
+   }
 
+   cout << "\n=== ВЫВОД СОДЕРЖИМОГО (" << lines.size() << " строк) ===" << endl;
+   cout << "------------------------------------------------" << endl;
+
+   for (size_t i = 0; i < lines.size(); ++i) {
+       cout << "Строка " << (i + 1) << ": \"" << lines[i] << "\"" << endl;
+   }
+
+   cout << "------------------------------------------------" << endl;
+   cout << "Всего строк: " << lines.size() << endl;
+}
 // Функция 3: Запись вектора строк в файл
 void writeLinesToFile(const vector<string>& lines, const string& filename) {
     // TODO: Реализовать запись в файл
@@ -46,6 +57,7 @@ void writeLinesToFile(const vector<string>& lines, const string& filename) {
 
 
 int main() {
+
     setlocale(LC_ALL, "Russian");
     wcout << L"=== ПРОГРАММА ДЛЯ РАБОТЫ С ТЕКСТОВЫМИ ФАЙЛАМИ ===" << endl;
     wcout << L"Авторы: Маруков, Лошкарёв, Перминов." << endl;
